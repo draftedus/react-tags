@@ -552,11 +552,12 @@ describe('Test ReactTags', () => {
 
 test('should render default tags with custom label field', () => {
   const labelField = 'name';
-  const mapper = (data) => ({ id: data.id, name: data.text });
+  const mapper = (data) => ({ id: data.id, name: data.text, className: data.text + '__className' });
   const tags = defaults.tags.map(mapper);
   const suggestions = defaults.suggestions.map(mapper);
 
   const expectedText = tags[0][labelField];
+  const expectedClassName = tags[0].className;
 
   const props = {
     labelField,
@@ -566,6 +567,7 @@ test('should render default tags with custom label field', () => {
 
   const $el = mount(mockItem(props));
   expect($el.text().slice(0, -1)).to.equal(expectedText);
+  expect($el.find('.' + expectedClassName).prop('className')).to.equal('ReactTags__tag ' + expectedClassName);
   $el.unmount();
 });
 
