@@ -24,11 +24,14 @@ class Tag extends Component {
       connectDropTarget,
       readOnly,
     } = props;
-    const extraClassName = props.tag && props.tag.className ? props.tag.className : '';
+    const extraClassName =
+      props.tag && props.tag.className ? props.tag.className : '';
     const tagComponent = (
       <span
         style={{ opacity: isDragging ? 0 : 1 }}
-        className={props.classNames.tag + (extraClassName ? ' ' + extraClassName : '')}
+        className={
+          props.classNames.tag + (extraClassName ? ' ' + extraClassName : '')
+        }
         onClick={props.onTagClicked}
         onKeyDown={props.onTagClicked}>
         {label}

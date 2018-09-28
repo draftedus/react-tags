@@ -552,7 +552,11 @@ describe('Test ReactTags', () => {
 
 test('should render default tags with custom label field', () => {
   const labelField = 'name';
-  const mapper = (data) => ({ id: data.id, name: data.text, className: data.text + '__className' });
+  const mapper = (data) => ({
+    id: data.id,
+    name: data.text,
+    className: data.text + '__className',
+  });
   const tags = defaults.tags.map(mapper);
   const suggestions = defaults.suggestions.map(mapper);
 
@@ -567,7 +571,9 @@ test('should render default tags with custom label field', () => {
 
   const $el = mount(mockItem(props));
   expect($el.text().slice(0, -1)).to.equal(expectedText);
-  expect($el.find('.' + expectedClassName).prop('className')).to.equal('ReactTags__tag ' + expectedClassName);
+  expect($el.find('.' + expectedClassName).prop('className')).to.equal(
+    'ReactTags__tag ' + expectedClassName
+  );
   $el.unmount();
 });
 
@@ -586,8 +592,10 @@ test('should allow duplicate tags when allowUnique is false', () => {
   const $input = $el.find('.ReactTags__tagInputField');
   $input.simulate('change', { target: { value: 'Apple' } });
   $input.simulate('keyDown', { keyCode: ENTER_ARROW_KEY_CODE });
-  expect(actual).to.have.deep.members([{
-    id: 'Apple',
-    text: 'Apple',
-  }]);
+  expect(actual).to.have.deep.members([
+    {
+      id: 'Apple',
+      text: 'Apple',
+    },
+  ]);
 });
